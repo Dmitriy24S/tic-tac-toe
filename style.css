@@ -50,10 +50,11 @@ main {
   align-items: center;
   transition: background-color 100ms ease;
 }
-.cell:hover {
+/* if not placed mark on cell - on hover tint cell darker */
+.cell:not(.x):not(.o):hover {
   background-color: hsl(350, 100%, 88%);
 }
-/* X cell */
+/* X cell (make X)*/
 .cell.x::before,
 .cell.x::after {
   content: "";
@@ -68,7 +69,7 @@ main {
 .cell.x::after {
   transform: rotate(-45deg);
 }
-/* X cell - Hover */
+/* X cell - Hover, if not placed mark on cell - on hover show preview mark on cell */
 .game-board.x .cell:not(.x):not(.o):hover::before,
 .game-board.x .cell:not(.x):not(.o):hover::after {
   content: "";
@@ -83,7 +84,7 @@ main {
 .game-board.x .cell::after {
   transform: rotate(-45deg);
 }
-/* O cell */
+/* O cell (make O, circle) */
 .cell.o::before,
 .cell.o::after {
   content: "";
@@ -100,7 +101,7 @@ main {
   width: 65%;
   height: 65%;
 }
-/* O cell - Hover */
+/* O cell - Hover, if not placed mark on cell - on hover show preview mark on cell */
 .game-board.o .cell:not(.x):not(.o):hover::before,
 .game-board.o .cell:not(.x):not(.o):hover::after {
   content: "";
@@ -142,7 +143,7 @@ main {
   display: flex;
 }
 /* Game winning message - Restart button */
-.restart-button {
+.game-winning-message__restart-button {
   padding: 0.5rem 0.7rem;
   background-color: white;
   text-align: black;
@@ -152,7 +153,7 @@ main {
   cursor: pointer;
   transition: color 150ms ease-out;
 }
-.restart-button:hover {
+.game-winning-message__restart-button:hover {
   color: rgb(184, 11, 11);
   color: rgb(37, 11, 184);
   color: rgb(136, 136, 136);
