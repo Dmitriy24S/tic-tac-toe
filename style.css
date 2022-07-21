@@ -1,0 +1,159 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Arial";
+  text-align: center;
+  background-color: hsl(209, 100%, 95%);
+}
+
+/* Header */
+header {
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0px 5px 5px 0px hsla(0, 0%, 0%, 0.09);
+  /* border-bottom: 1px solid hsl(0, 0%, 50%); */
+}
+.header-title {
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+/* Main */
+main {
+  margin-top: 2rem;
+}
+.game-board {
+  background-color: white;
+  box-shadow: 0px 5px 5px 0px hsla(0, 0%, 0%, 0.09);
+  width: 20rem;
+  margin: 0 auto;
+  min-height: 20rem;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-gap: 5px;
+  padding: 5px;
+}
+.cell {
+  background-color: hsl(350, 100%, 92%);
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 100ms ease;
+}
+.cell:hover {
+  background-color: hsl(350, 100%, 88%);
+}
+/* X cell */
+.cell.x::before,
+.cell.x::after {
+  content: "";
+  position: absolute;
+  background-color: rgb(0, 0, 0);
+  height: 90%;
+  width: 10px;
+}
+.cell.x::before {
+  transform: rotate(45deg);
+}
+.cell.x::after {
+  transform: rotate(-45deg);
+}
+/* X cell - Hover */
+.game-board.x .cell:not(.x):not(.o):hover::before,
+.game-board.x .cell:not(.x):not(.o):hover::after {
+  content: "";
+  position: absolute;
+  background-color: rgb(153, 153, 153);
+  height: 90%;
+  width: 10px;
+}
+.game-board.x .cell::before {
+  transform: rotate(45deg);
+}
+.game-board.x .cell::after {
+  transform: rotate(-45deg);
+}
+/* O cell */
+.cell.o::before,
+.cell.o::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.cell.o::before {
+  background-color: black;
+  width: 85%;
+  height: 85%;
+}
+.cell.o::after {
+  background-color: hsl(350, 100%, 92%);
+  width: 65%;
+  height: 65%;
+}
+/* O cell - Hover */
+.game-board.o .cell:not(.x):not(.o):hover::before,
+.game-board.o .cell:not(.x):not(.o):hover::after {
+  content: "";
+  position: absolute;
+}
+.game-board.o .cell:not(.x):not(.o):hover::before {
+  background-color: rgb(153, 153, 153);
+  width: 85%;
+  height: 85%;
+  border-radius: 50%;
+}
+.game-board.o .cell:not(.x):not(.o):hover::after {
+  background-color: hsl(350, 100%, 92%);
+  width: 65%;
+  height: 65%;
+  border-radius: 50%;
+}
+
+/* Game winning message */
+.game-winning-message {
+  position: fixed;
+  display: none;
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: rgb(0, 0, 0, 0.9);
+  inset: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  color: white;
+  font-size: 2.5rem;
+}
+/* Game winning message - Show/hide */
+.show {
+  display: flex;
+}
+/* Game winning message - Restart button */
+.restart-button {
+  padding: 0.5rem 0.7rem;
+  background-color: white;
+  text-align: black;
+  font-weight: 600;
+  border-radius: 5px;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 150ms ease-out;
+}
+.restart-button:hover {
+  color: rgb(184, 11, 11);
+  color: rgb(37, 11, 184);
+  color: rgb(136, 136, 136);
+}
