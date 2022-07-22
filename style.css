@@ -59,9 +59,11 @@ main {
 .cell.x::after {
   content: "";
   position: absolute;
-  background-color: rgb(0, 0, 0);
+  /* background-color: rgb(0, 0, 0); */
+  background-color: rgb(49, 61, 175);
   height: 90%;
-  width: 10px;
+  /* width: 10px; */
+  width: 15px;
 }
 .cell.x::before {
   transform: rotate(45deg);
@@ -74,9 +76,11 @@ main {
 .game-board.x .cell:not(.x):not(.o):hover::after {
   content: "";
   position: absolute;
-  background-color: rgb(153, 153, 153);
+  /* background-color: rgb(153, 153, 153); */
+  background-color: rgb(152, 156, 214);
   height: 90%;
-  width: 10px;
+  /* width: 10px; */
+  width: 15px;
 }
 .game-board.x .cell::before {
   transform: rotate(45deg);
@@ -92,14 +96,19 @@ main {
   border-radius: 50%;
 }
 .cell.o::before {
-  background-color: black;
-  width: 85%;
-  height: 85%;
+  /* background-color: black; */
+  /* width: 85%; */
+  /* height: 85%; */
+  background-color: rgb(175, 19, 19);
+  width: 82%;
+  height: 82%;
 }
 .cell.o::after {
   background-color: hsl(350, 100%, 92%);
-  width: 65%;
-  height: 65%;
+  /* width: 65%;  */
+  /* height: 65%; */
+  width: 55%;
+  height: 55%;
 }
 /* O cell - Hover, if not placed mark on cell - on hover show preview mark on cell */
 .game-board.o .cell:not(.x):not(.o):hover::before,
@@ -108,15 +117,22 @@ main {
   position: absolute;
 }
 .game-board.o .cell:not(.x):not(.o):hover::before {
-  background-color: rgb(153, 153, 153);
-  width: 85%;
-  height: 85%;
+  /* outside circle side */
   border-radius: 50%;
+  /* background-color: rgb(153, 153, 153); */
+  /* width: 85%; */
+  /* height: 85%; */
+  background-color: rgb(214, 121, 121);
+  width: 82%;
+  height: 82%;
 }
 .game-board.o .cell:not(.x):not(.o):hover::after {
+  /* inside of circle, inside bg color of cell */
   background-color: hsl(350, 100%, 92%);
-  width: 65%;
-  height: 65%;
+  /* width: 65%; */
+  /* height: 65%; */
+  width: 55%;
+  height: 55%;
   border-radius: 50%;
 }
 
