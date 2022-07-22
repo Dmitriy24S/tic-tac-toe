@@ -8,7 +8,7 @@ const winningConditions = [
   [0, 4, 8], // diagonal
   [2, 4, 6], // diagonal
 ];
-let circleTurn = false;
+let circleTurn = false; // X start first
 
 const gameBoard = document.querySelector(".game-board"); // Select game board
 const cellElements = document.querySelectorAll(".cell"); // Grab all game-board cells
@@ -22,10 +22,15 @@ const cellElements = document.querySelectorAll(".cell"); // Grab all game-board 
 const gameWinMessage = document.querySelector(".game-winning-message");
 const gameWinMessageText = document.querySelector(".game-winning-message__text");
 const restartButton = document.querySelector(".game-winning-message__restart-button");
-function gameOver() {
+function gameOver(isDraw) {
   gameWinMessage.classList.add("show"); // display game over overlay
-  gameWinMessageText.innerText = `${(currentPlayerClass = circleTurn ? "O's" : "X's")} Win!`; // game over winner text
+  if (isDraw) {
+    gameWinMessageText.innerText = "Draw!";
+  } else {
+    gameWinMessageText.innerText = `${(currentPlayerClass = circleTurn ? "O's" : "X's")} Win!`; // game over winner text
+  }
 }
+// Restart game on restart button click
 restartButton.addEventListener("click", gameStart);
 
 // Game start (show hover mark, reset everything)
@@ -43,6 +48,7 @@ function gameStart() {
 gameStart();
 
 // Handle click on game-board cell:
+// Calculate game status:
 // const handleCellClick = (e) => { // ! Cannot access 'handleCellClick' before initialization
 function handleCellClick(e) {
   console.log("cell clicked");
@@ -54,10 +60,15 @@ function handleCellClick(e) {
   if (checkWin(currentPlayerClass)) {
     gameOver();
     console.log("winner");
+    // If no win - Check for draw:
+  } else if (checkDraw()) {
+    gameOver(true); // give isDraw status = true
+    console.log("draw");
+    // If no winner or draw, switch turns, update hover to show new current player mark on cell hover:
+  } else {
+    switchTurns();
+    setGameboardHoverClass(); // update current player hover class
   }
-  // If no winner, switch turns, update hover to show new current player mark:
-  switchTurns();
-  setGameboardHoverClass(); // update current player hover class
 }
 
 // Place mark on cell click:
@@ -77,7 +88,7 @@ function setGameboardHoverClass() {
   gameBoard.classList.add((currentPlayerClass = circleTurn ? "o" : "x")); // update to show current player hover state mark
 }
 
-// Check win:
+// Check for win:
 function checkWin(currentPlayerClass) {
   // Reference:
   // const winningConditions = [
@@ -98,4 +109,11 @@ function checkWin(currentPlayerClass) {
   });
 }
 
-// Check Draw:
+// Check for draw:
+function checkDraw() {
+  // cellElements.every(cell => {
+  return [...cellElements].every((cell) => {
+    // check if every gameboard cell is filled with either "x" or "o" player mark
+    return cell.classList.contains("x") || cell.classList.contains("o");
+  });
+}
